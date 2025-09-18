@@ -6,70 +6,66 @@
 <title>Nitake</title>
 <style>
 body, h1, h2, h3, p, span {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif !important;
 }
 
-.important, .highlight, a {
-  color: #6c63ff;
+.important, .highlight, a, a:visited {
+  color: #6c63ff !important;
   transition: color 0.3s;
 }
 
 a:hover {
-  color: #574fd6;
+  color: #574fd6 !important;
 }
 
-button {
-  background-color: #6c63ff;
-  color: white;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
+button, .btn, .tab-button {
+  font-family: 'Roboto', sans-serif !important;
+  background-color: #6c63ff !important;
+  color: white !important;
+  border-radius: 6px !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.3s !important;
 }
 
-button:hover {
-  background-color: #574fd6;
-}
-
-.tab-button {
-  font-family: 'Roboto', sans-serif;
-  background-color: inherit;
-  color: inherit;
-  border-bottom: 2px solid transparent;
-  padding: 0;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.tab-button:hover {
-  border-bottom: 2px solid #6c63ff;
+button:hover, .btn:hover, .tab-button:hover {
+  background-color: #574fd6 !important;
 }
 
 .tab-button.active {
-  border-bottom: 2px solid #6c63ff;
-  font-weight: bold;
+  border-bottom: 2px solid #6c63ff !important;
+  font-weight: bold !important;
+}
+
+.tab-button {
+  background-color: inherit !important;
+  color: inherit !important;
+  border-bottom: 2px solid transparent !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  transition: all 0.3s !important;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
+    background-color: #1e1e1e !important;
+    color: #e0e0e0 !important;
   }
 
-  .important, .highlight, a {
-    color: #8c84ff;
+  .important, .highlight, a, a:visited {
+    color: #8c84ff !important;
   }
 
-  button {
-    background-color: #8c84ff;
+  button, .btn, .tab-button {
+    background-color: #8c84ff !important;
   }
 
   .tab-button:hover {
-    border-bottom: 2px solid #8c84ff;
+    border-bottom: 2px solid #8c84ff !important;
   }
 
   .tab-button.active {
-    border-bottom: 2px solid #8c84ff;
+    border-bottom: 2px solid #8c84ff !important;
   }
 }
 </style>
