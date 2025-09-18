@@ -3,67 +3,36 @@
 <html lang="ja">
 <head>
 <style>
-/* 基本のスタイル */
-body {
-  font-family: 'Arial', sans-serif;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f9;
-  color: #333333;
-  transition: background-color 0.3s, color 0.3s;
+/* フォントをおしゃれに */
+body, h1, h2, h3, p {
+  font-family: 'Roboto', sans-serif;
 }
 
-a {
-  color: #6c63ff;
-  text-decoration: none;
-  transition: color 0.3s;
+/* アクセントカラー */
+.important, .highlight {
+  color: #6c63ff; /* 紫で強調 */
 }
 
-a:hover {
-  color: #574fd6;
+/* ボタン */
+button {
+  background-color: #6c63ff;
+  color: #fff;
+  border-radius: 6px;
 }
 
-/* ダークモード */
+/* ダークモード対応 */
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #1e1e1e;
     color: #e0e0e0;
+    background-color: #1e1e1e;
   }
 
-  a {
+  .important, .highlight {
     color: #8c84ff;
   }
 
-  a:hover {
-    color: #6f63ff;
-  }
-}
-
-/* ボタンのスタイル */
-button {
-  background-color: #6c63ff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #574fd6;
-}
-
-/* レスポンシブデザイン */
-@media (max-width: 768px) {
-  body {
-    padding: 10px;
-  }
-
   button {
-    width: 100%;
-    padding: 15px;
+    background-color: #8c84ff;
   }
 }
 
