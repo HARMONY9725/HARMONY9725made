@@ -3,31 +3,32 @@
 <html lang="ja">
 <head>
 <style>
-/* フォントをおしゃれに */
-body, h1, h2, h3, p {
+/* フォントをおしゃれにする */
+body, h1, h2, h3, p, span {
   font-family: 'Roboto', sans-serif;
 }
 
 /* アクセントカラー */
-.important, .highlight {
-  color: #6c63ff; /* 紫で強調 */
+.important, .highlight, a {
+  color: #6c63ff; /* 紫系で統一 */
 }
 
 /* ボタン */
 button {
   background-color: #6c63ff;
-  color: #fff;
+  color: white;
   border-radius: 6px;
+  border: none;
 }
 
 /* ダークモード対応 */
 @media (prefers-color-scheme: dark) {
   body {
-    color: #e0e0e0;
     background-color: #1e1e1e;
+    color: #e0e0e0;
   }
 
-  .important, .highlight {
+  .important, .highlight, a {
     color: #8c84ff;
   }
 
