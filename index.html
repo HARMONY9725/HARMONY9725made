@@ -18,6 +18,7 @@
     background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
     color: #333;
     line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
   }
 
   a {
@@ -38,12 +39,7 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     z-index: 1000;
     text-align: center;
-    @media (prefers-color-scheme: dark) {
-  body {
-    background-color: #000;
-    color: #fff;
-      }
-    }
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
   }
 
   header h1 {
@@ -65,7 +61,7 @@
     padding: 20px;
     margin: 20px 0;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s, color 0.3s;
   }
 
   .card:hover {
@@ -91,13 +87,7 @@
     padding: 10px 20px;
     border-radius: 8px;
     text-decoration: none;
-    transition: all 0.3s;
-  }
-
-  .btn:hover {
-    background: #574fd6;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: none;
   }
 
   /* --- フッター --- */
@@ -106,6 +96,50 @@
     padding: 30px 20px;
     color: #777;
     font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+
+  /* --- ダークモード --- */
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: #121212;
+      color: #e0e0e0;
+    }
+
+    header {
+      background: #1e1e1e;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    }
+
+    header h1 {
+      color: #a39fff;
+    }
+
+    .card {
+      background: #1e1e1e;
+      color: #e0e0e0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+
+    .card h2 {
+      color: #a39fff;
+    }
+
+    .btn {
+      background: #8c84ff;
+      color: #fff;
+    }
+
+    footer {
+      color: #aaa;
+    }
+
+    a {
+      color: #8c84ff;
+    }
+    a:hover {
+      color: #6f63ff;
+    }
   }
 </style>
 </head>
