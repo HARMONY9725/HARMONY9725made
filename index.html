@@ -3,41 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HARMONY9725made</title>
+<title>HARMONY9725 Made</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  /* --- Reset & 基本 --- */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+    color: #333;
+    line-height: 1.6;
+  }
+
+  a {
+    color: #6c63ff;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  a:hover {
+    color: #574fd6;
+  }
+
+  /* --- ヘッダー --- */
+  header {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    padding: 15px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    z-index: 1000;
     text-align: center;
-    font-size: 30px;
   }
-  @media (prefers-color-scheme: dark) {
-  .logo {
-  filter: invert(1);
+
+  header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #6c63ff;
   }
-  body {
-    background-color: #000;
+
+  /* --- メインコンテンツ --- */
+  main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  .card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #574fd6;
+  }
+
+  .card p {
+    margin-bottom: 10px;
+  }
+
+  /* --- ボタン --- */
+  .btn {
+    display: inline-block;
+    background: #6c63ff;
     color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s;
   }
-}
+
+  .btn:hover {
+    background: #574fd6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  /* --- フッター --- */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: #777;
+    font-size: 0.9rem;
+  }
 </style>
 </head>
 <body>
-<h1>
-HARMONY9725made
-</h1>
-<h5>
-  HARMONY9725の作品を是非見てってください
-</h5>
-<h2>
-  <a href="https://harmony9725.github.io/HARMONY9725made/colorandom.html">
-    colorandom
-  </a>
-</h2>
-<h5>
-  ランダムに色を表示してくれるので好きな色<br>色の組み合わせを見つけられるかもです
-</h5>
-<logo>
-  <a href="https://x.com/HARMONY_9725">
-    <img src="images/Xlogo.png" alt="Xlogo" width="30" height="30"></img>
-  </a>
-</logo>
+
+<header>
+  <h1>HARMONY9725 Made</h1>
+</header>
+
+<main>
+  <div class="card">
+    <h2>プロジェクト1</h2>
+    <p>これはあなたのサイトのコンテンツ例です。ここに紹介文や説明を入れられます。</p>
+    <a href="#" class="btn">詳細を見る</a>
+  </div>
+
+  <div class="card">
+    <h2>プロジェクト2</h2>
+    <p>カードレイアウトで情報が整理され、視覚的に見やすくなります。</p>
+    <a href="#" class="btn">詳細を見る</a>
+  </div>
+
+  <div class="card">
+    <h2>プロジェクト3</h2>
+    <p>ボタンやリンクにはアクセントカラーとホバー効果を追加しています。</p>
+    <a href="#" class="btn">詳細を見る</a>
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 HARMONY9725
+</footer>
+
 </body>
+</html>
