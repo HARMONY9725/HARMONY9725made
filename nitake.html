@@ -1,27 +1,55 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nitake</title>
 <style>
-/* フォントをおしゃれにする */
 body, h1, h2, h3, p, span {
   font-family: 'Roboto', sans-serif;
 }
 
-/* アクセントカラー */
 .important, .highlight, a {
-  color: #6c63ff; /* 紫系で統一 */
+  color: #6c63ff;
+  transition: color 0.3s;
 }
 
-/* ボタン */
+a:hover {
+  color: #574fd6;
+}
+
 button {
   background-color: #6c63ff;
   color: white;
   border-radius: 6px;
   border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-/* ダークモード対応 */
+button:hover {
+  background-color: #574fd6;
+}
+
+.tab-button {
+  font-family: 'Roboto', sans-serif;
+  background-color: inherit;
+  color: inherit;
+  border-bottom: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tab-button:hover {
+  border-bottom: 2px solid #6c63ff;
+}
+
+.tab-button.active {
+  border-bottom: 2px solid #6c63ff;
+  font-weight: bold;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #1e1e1e;
@@ -35,275 +63,62 @@ button {
   button {
     background-color: #8c84ff;
   }
-}
 
+  .tab-button:hover {
+    border-bottom: 2px solid #8c84ff;
+  }
+
+  .tab-button.active {
+    border-bottom: 2px solid #8c84ff;
+  }
+}
 </style>
-<link href="images/favicon.ico" rel="icon"/>
-<meta charset="utf-8"/>
-<title>二竹式</title>
 </head>
 <body>
-<pop>
-    Hello nitake.
-    </pop>
-<h4>
-<dounyuu>    
-二竹式は今までのqwertyによる束縛をフォイっと(fwoy,)払ってくれます()<br/>そして、AHK,PowerToysのKeyboard Manager,WINDOWSではなく<br/>MACをお使いの方はKarabiner-Elementsなどを使うことで<br/>無料で導入することができ、いつでもこれを無効にすることができます
-</dounyuu>
-</h4>
-<div style="text-align: center;"><img alt="nitake layout" src="images/nitake-layout.png"/></div>
-<div style="text-align:center;"><tokuchou>特徴</tokuchou></div>
-<div class="tabs">
-<div class="tab active" data-tab="tab1">特徴 1</div>
-<div class="tab" data-tab="tab2">特徴 2</div>
-<div class="tab" data-tab="tab3">特徴 3</div>
-</div>
-<div class="content">
-<div class="content-panel active" id="tab1"><div style="text-align:center;">
-<tokuchoup>1.xcvの場所</tokuchoup>
-</div>
-<div style="text-align:center;">
-<tokuchouh>
-xcvはコピペなどで使用率が高いため,端っこの方に残しました。<br/>ただ、zはどうしてもタイピングで使うので右側に入れました。<div style="text-align:center;"><img alt="nitake xcv" src="images/nitake-xcv.png"/></div>
-</tokuchouh>
-</div></div>
-<div class="content-panel" id="tab2"><div style="text-align:center;">
-<tokuchoup>
-        2.打ちやすさ
-    </tokuchoup>
-</div>
-<div style="text-align:center;">
-<tokuchouh>
-日本語入力でよく使うキーを指の届きやすいところに配置しました。<br/>そして、個人的にBSをよく使うのでSpaceをBSにしました（自分基準）
-    </tokuchouh>
-</div>
-<br/>
-<div style="text-align:center;">
-<img alt="nitake rank" src="images/nitake-rank.png"/>
-</div>
-<h4>
-    ↑の数字は使用頻度
-</h4>
-</div>
-<div class="content-panel" id="tab3"><tokuchoup>
-    3.記号
-</tokuchoup>
-<div style="text-align:center;">
-<tokuchouh>
-二竹式はSpace長押しで他のキーを押すと記号や数字,Enter,IMEのオンオフなど<br/>様々なことが手を動かさないでできてしまいます。<br/>(PowerToysのKeyboard Managerは使えません)
-</tokuchouh>
-</div>
-<br/>
-<div style="text-align:center;">
-<img alt="nitake symbol" src="images/nitake-symbol.png"/>
-</div>
-</div>
-<script>  const tabs = document.querySelectorAll('.tab');
-  const panels = document.querySelectorAll('.content-panel');
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const targetId = tab.getAttribute('data-tab');
+<header>
+  <h1>Nitake</h1>
+</header>
 
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
+<main>
+  <div class="tabs">
+    <button class="tab-button active" onclick="openTab(event, 'tab1')">タブ1</button>
+    <button class="tab-button" onclick="openTab(event, 'tab2')">タブ2</button>
+    <button class="tab-button" onclick="openTab(event, 'tab3')">タブ3</button>
+  </div>
 
-      panels.forEach(panel => {
-        if (panel.id === targetId) {
-          panel.classList.add('active');
-        } else {
-          panel.classList.remove('active');
-        }
-      });
-    });
-  });</script>
-<hr/>
-<pop>
-    AHKのコード
-</pop>
-<details>
-<summary>詳細</summary>
-    後で作る
-</details>
-<hr/> 
-ここからは実際に二竹式を体験できます。論理配列をqwertyに設定してください。
-<!--ここから練習用タイピング-->
-<div id="kana">読み込み中...</div>
-<div id="romaji"></div>
-<div id="typed"></div>
-<div id="result"></div>
-<div id="score">スコア: 0</div>
-<div id="timer">残り時間: 60秒</div>
-<button id="retry">もう一度プレイ</button>
-<script> const keyRemap = {
-    'a': 'u', 'c': 'v', 'd': 'a', 'e': 'o', 'f': 'i', 'g': '.', 'h': 'g',
-    'i': 'h', 'j': 't', 'k': 'n', 'l': 'k', 'n': 'd', 'o': 'b', 'q': 'f',
-    'r': 'y', 's': 'e', 't': ',', 'u': 'r', 'v': 'w', 'x': 'c', 'y': 'z',
-    'z': 'x', ',': 'q', '.': 'l', '/': 'j', ';': 's'
-  };
+  <section id="tab1" class="tab-content" style="display:block;">
+    <p>タブ1の内容です。</p>
+  </section>
+  <section id="tab2" class="tab-content" style="display:none;">
+    <p>タブ2の内容です。</p>
+  </section>
+  <section id="tab3" class="tab-content" style="display:none;">
+    <p>タブ3の内容です。</p>
+  </section>
 
-  const words = [
-    { kana: "さかな", roma: "sakana" },
-    { kana: "たこ", roma: "tako" },
-    { kana: "いぬ", roma: "inu" },
-    { kana: "ねこ", roma: "neko" },
-    { kana: "うま", roma: "uma" },
-    { kana: "とり", roma: "tori" },
-    { kana: "かめ", roma: "kame" },
-    { kana: "しか", roma: "sika" },
-    { kana: "くま", roma: "kuma" },
-    { kana: "ぞう", roma: "zou" },
-    { kana: "きつね", roma: "kitune" },
-    { kana: "りす", roma: "risu" },
-    { kana: "へび", roma: "hebi" },
-    { kana: "あり", roma: "ari" },
-    { kana: "かに", roma: "kani" },
-    { kana: "えび", roma: "ebi" },
-    { kana: "うし", roma: "usi" },
-    { kana: "ひつじ", roma: "hituzi" },
-    { kana: "とんぼ", roma: "tonbo" },
-    { kana: "ちょう", roma: "tyou" },
-    { kana: "すいか", roma: "suika" },
-    { kana: "りんご", roma: "ringo" },
-    { kana: "みかん", roma: "mikan" },
-    { kana: "もも", roma: "momo" },
-    { kana: "いちご", roma: "itigo" },
-    { kana: "なし", roma: "nasi" },
-    { kana: "ぶどう", roma: "budou" },
-    { kana: "ばなな", roma: "banana" },
-    { kana: "さくらんぼ", roma: "sakuranbo" },
-    { kana: "めろん", roma: "meron" },
-    { kana: "じゃんけん", roma: "janken" },
-    { kana: "じゅぎょう", roma: "jugyou" },
-    { kana: "じょおう", roma: "joou" },
-    { kana: "じょうほう", roma: "jouhou" },
-    { kana: "じゅうりょう", roma: "juuryou" },
-    { kana: "ジャンル", roma: "janru" },
-    { kana: "じしょ", roma: "zisyo" },
-    { kana: "じょうしき", roma: "jousiki" },
-    { kana: "じゅうどう", roma: "juudou" },
-    { kana: "じょせい", roma: "josei" }
-  ];
+  <button>ボタン例</button>
+</main>
 
-  let current = {};
-  let score = 0;
-  let timeLeft = 60;
-  let timer = null;
-  let gameActive = false;
-  let timerStarted = false;
-  let inputPos = 0;
+<footer>
+  <p>&copy; 2025 HARMONY9725</p>
+</footer>
 
-  const kanaEl = document.getElementById("kana");
-  const romajiEl = document.getElementById("romaji");
-  const typedEl = document.getElementById("typed");
-  const resultEl = document.getElementById("result");
-  const scoreEl = document.getElementById("score");
-  const timerEl = document.getElementById("timer");
-  const retryBtn = document.getElementById("retry");
-
-  function pickWord() {
-    current = words[Math.floor(Math.random() * words.length)];
-    kanaEl.textContent = current.kana;
-    romajiEl.textContent = current.roma;
-    typedEl.innerHTML = "";
-    inputPos = 0;
+<script>
+function openTab(evt, tabName) {
+  var i, tabcontent, tabbuttons;
+  tabcontent = document.getElementsByClassName("tab-content");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
   }
-
-  function startTimer() {
-    if (!timerStarted) {
-      timerStarted = true;
-      gameActive = true;
-      timer = setInterval(() => {
-        timeLeft--;
-        timerEl.textContent = `残り時間: ${timeLeft}秒`;
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          gameActive = false;
-          resultEl.textContent = "時間切れ";
-          retryBtn.style.display = "inline-block";
-        }
-      }, 1000);
-    }
+  tabbuttons = document.getElementsByClassName("tab-button");
+  for (i = 0; i < tabbuttons.length; i++) {
+    tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
   }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
 
-  function startGame() {
-    score = 0;
-    timeLeft = 60;
-    timerStarted = false;
-    gameActive = false;
-    scoreEl.textContent = `スコア: ${score}`;
-    timerEl.textContent = `残り時間: ${timeLeft}秒`;
-    resultEl.textContent = "";
-    retryBtn.style.display = "none";
-    pickWord();
-    typedEl.innerHTML = "";
-    inputPos = 0;
-  }
-
-  function getRemappedKey(e) {
-    const k = e.key.toLowerCase();
-    if (keyRemap.hasOwnProperty(k)) {
-      return keyRemap[k];
-    }
-    if (k.length === 1 && k.match(/[a-z,.;\/]/)) {
-      return k;
-    }
-    return null;
-  }
-
-  window.addEventListener("keydown", e => {
-    if (!timerStarted) {
-      // 最初の有効入力でタイマー開始
-      if (e.key.length === 1 || e.key === "Backspace") {
-        startTimer();
-      }
-    }
-
-    if (!gameActive) return;
-
-    if (["Shift", "Control", "Alt", "CapsLock", "Tab", "Meta"].includes(e.key)) return;
-
-    e.preventDefault();
-
-    if (e.key === "Backspace") {
-      if (inputPos > 0) {
-        inputPos--;
-        typedEl.innerHTML = typedEl.innerHTML.slice(0, -1);
-      }
-      return;
-    }
-
-    const remapped = getRemappedKey(e);
-    if (!remapped) return;
-
-    const expectedChar = current.roma[inputPos];
-    if (!expectedChar) return;
-
-    if (remapped === expectedChar) {
-      typedEl.innerHTML += `<span style="color:#0e6e28">${remapped}</span>`;
-      inputPos++;
-      if (inputPos === current.roma.length) {
-        score++;
-        scoreEl.textContent = `スコア: ${score}`;
-        resultEl.textContent = "次";
-        setTimeout(() => {
-          resultEl.textContent = "";
-          pickWord();
-        }, 500);
-      }
-    } else {
-      resultEl.textContent = "ミス";
-      typedEl.innerHTML += `<span style="color:red">${remapped}</span>`;
-      setTimeout(() => { resultEl.textContent = ""; }, 800);
-    }
-  });
-
-  retryBtn.addEventListener("click", () => {
-    startGame();
-  });
-
-  window.onload = () => {
-    startGame();
-  };</script>
-</div></body>
+</body>
 </html>
