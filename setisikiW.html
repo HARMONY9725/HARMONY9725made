@@ -3,62 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <title>setisikiW</title>
+<meta charset="UTF-8">
 <style>
-  body {
+body {
     font-family: sans-serif;
-    background: #fff;
-    color: #000;
-    transform: scaleX(-1); /* 鏡文字 */
+    transform: scaleX(-1);
     direction: rtl;
     margin: 0;
     padding: 20px;
-  }
-  #searchBar {
-    transform: scaleX(-1);
+    background: #fff;
+    color: #000;
+}
+#searchBar {
     width: 100%;
-    padding: 10px;
     font-size: 18px;
+    padding: 10px;
     margin-bottom: 20px;
-  }
-  #content {
+    transform: scaleX(-1);
+}
+#content {
     max-width: 1000px;
     margin: auto;
-  }
-  img {
-    transform: scaleX(-1); /* 画像を再反転して正向き */
+}
+img, table, pre {
+    transform: scaleX(-1);
     max-width: 100%;
     height: auto;
-  }
-  table {
+}
+table {
     border-collapse: collapse;
     width: 100%;
-  }
-  table, th, td {
+}
+table, th, td {
     border: 1px solid #aaa;
-  }
-  th, td {
+}
+th, td {
     padding: 4px 8px;
-  }
-  a {
+}
+a {
     color: blue;
     cursor: pointer;
-  }
-  h1,h2,h3,h4,h5,h6 {
+}
+h1,h2,h3,h4,h5,h6 {
     border-bottom: 1px solid #ccc;
     padding-bottom: 4px;
     margin-top: 20px;
-  }
+}
 </style>
 </head>
 <body>
 <input id="searchBar" type="text" placeholder="Wikipedia検索" onkeydown="if(event.key==='Enter'){searchWiki()}">
 <div id="content">ここに記事が表示されます</div>
-
 <script>
 async function searchWiki() {
     const query = document.getElementById('searchBar').value;
     if(!query) return;
-
     const searchUrl = `https://ja.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&origin=*`;
     try {
         const searchRes = await fetch(searchUrl);
@@ -70,11 +69,9 @@ async function searchWiki() {
         const title = searchData.query.search[0].title;
         loadPage(title);
     } catch(err){
-        console.error(err);
         document.getElementById('content').innerHTML = '検索中にエラーが発生しました';
     }
 }
-
 async function loadPage(title){
     const pageUrl = `https://ja.wikipedia.org/w/api.php?action=parse&page=${encodeURIComponent(title)}&format=json&origin=*`;
     try {
@@ -82,8 +79,6 @@ async function loadPage(title){
         const pageData = await pageRes.json();
         const html = pageData.parse.text['*'];
         document.getElementById('content').innerHTML = html;
-
-        // 内部リンククリック処理
         document.querySelectorAll('#content a').forEach(a => {
             a.onclick = e => {
                 e.preventDefault();
@@ -94,13 +89,10 @@ async function loadPage(title){
                 loadPage(newTitle);
             }
         });
-
-        // 画像も鏡文字ビューで正向きに
-        document.querySelectorAll('#content img').forEach(img => {
-            img.style.transform = 'scaleX(-1)'; // 反転解除のために再反転
+        document.querySelectorAll('#content img, #content table, #content pre').forEach(el => {
+            el.style.transform = 'scaleX(-1)';
         });
     } catch(err){
-        console.error(err);
         document.getElementById('content').innerHTML = 'ページ読み込み中にエラーが発生しました';
     }
 }
