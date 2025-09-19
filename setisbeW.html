@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Wikipedia 鏡文字ビューア</title>
+<style>
+  body {
+    font-family: sans-serif;
+    transform: scaleX(-1); /* 鏡文字 */
+    direction: rtl;
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+  }
+  #searchBar {
+    transform: scaleX(-1); /* 検索バーも反転 */
+    display: block;
+    width: 100%;
+    font-size: 18px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  a {
+    color: blue;
+    cursor: pointer;
+  }
+  img {
+    transform: scaleX(-1); /* 画像も鏡にしたい場合 */
+  }
+</style>
+</head>
+<body>
+<input type="text" id="searchBar" placeholder="Wikipedia検索" onkeydown="if(event.key==='Enter'){searchWiki()}">
+<div id="content">ここに記事が表示されます</div>
+
+<script>
+async function searchWiki() {
+    const query = document.getElementById('searchBar').value;
+    if(!query) return;
+
+    // 検索して最初の結果を取得
+    const searchUrl = `https://ja.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&origin=*`;
+    try {
+        const searchRes = await fetch(searchUrl);
+        const searchData = await searchRes.json();
+        if(!searchData.query.search.length){
+            document.getElementById('content').innerHTML = '見つかりませんでした';
+            return;
+        }
+        const title = searchData.query.search[0].title;
+        loadPage(title);
+    } catch(err){
+        console.error(err);
+        document.getElementById('content').innerHTML = '検索中にエラーが発生しました';
+    }
+}
+
+async function loadPage(title){
+    const pageUrl = `https://ja.wikipedia.org/w/api.php?action=parse&page=${encodeURIComponent(title)}&format=json&origin=*`;
+    try {
+        const pageRes = await fetch(pageUrl);
+        const pageData = await pageRes.json();
+        const html = pageData.parse.text['*'];
+        document.getElementById('content').innerHTML = html;
+
+        // 内部リンクのクリック処理
+        document.querySelectorAll('#content a').forEach(a => {
+            a.onclick = e => {
+                e.preventDefault();
+                const href = a.getAttribute('href');
+                if(!href.startsWith('/wiki/')) return;
+                const newTitle = decodeURIComponent(href.replace('/wiki/', ''));
+                document.getElementById('searchBar').value = newTitle;
+                loadPage(newTitle);
+            }
+        });
+    } catch(err){
+        console.error(err);
+        document.getElementById('content').innerHTML = 'ページ読み込み中にエラーが発生しました';
+    }
+}
+</script>
+</body>
+</html>
