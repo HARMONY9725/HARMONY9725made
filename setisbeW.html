@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>逆順検索サイト</title>
+<style>
+  body {
+    font-family: sans-serif;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    min-height:100vh;
+    background:#f5f5f5;
+  }
+  .search-container {
+    margin-top:50px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  input[type="text"] {
+    width:300px;
+    padding:10px;
+    font-size:18px;
+    text-align:left;
+  }
+  button {
+    margin-top:10px;
+    padding:10px 20px;
+    font-size:16px;
+    cursor:pointer;
+  }
+  .results {
+    margin-top:40px;
+    width:80%;
+    max-width:800px;
+  }
+  .result-item {
+    margin-bottom:15px;
+    padding:10px;
+    background:white;
+    border-radius:6px;
+    box-shadow:0 0 4px rgba(0,0,0,0.2);
+  }
+  .result-item a {
+    text-decoration:none;
+    color:#0073e6;
+  }
+</style>
+</head>
+<body>
+
+<div class="search-container">
+  <input type="text" id="searchBox" placeholder="検索ワードを入力">
+  <button id="searchBtn">検索</button>
+</div>
+
+<div class="results" id="results"></div>
+
+<script>
+// サンプル検索データ
+const sampleData = [
+  {title:"HTMLチュートリアル", url:"#sample1"},
+  {title:"CSSガイド", url:"#sample2"},
+  {title:"JavaScript入門", url:"#sample3"},
+  {title:"Webデザイン例", url:"#sample4"},
+  {title:"フロントエンド技術", url:"#sample5"}
+];
+
+// 入力文字を逆順に表示
+const searchBox = document.getElementById('searchBox');
+searchBox.addEventListener('input', ()=>{
+  const val = searchBox.value;
+  const reversed = val.split('').reverse().join('');
+  searchBox.value = reversed;
+});
+
+// 検索実行
+const searchBtn = document.getElementById('searchBtn');
+const resultsDiv = document.getElementById('results');
+searchBtn.addEventListener('click', ()=>{
+  resultsDiv.innerHTML='';
+  // 逆順に配列を表示
+  const reversedData = [...sampleData].reverse();
+  reversedData.forEach(item=>{
+    const div = document.createElement('div');
+    div.className='result-item';
+    const a = document.createElement('a');
+    a.href=item.url;
+    a.textContent=item.title.split('').reverse().join('');
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      openReversedPage(item.title);
+    });
+    div.appendChild(a);
+    resultsDiv.appendChild(div);
+  });
+});
+
+// クリックで反転ページを表示
+function openReversedPage(title){
+  const newWin = window.open();
+  newWin.document.write(`
+    <html>
+    <head>
+      <title>${title}</title>
+      <style>
+        body { 
+          transform: rotateY(180deg);
+          font-family:sans-serif;
+          padding:20px;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>${title.split('').reverse().join('')}</h1>
+      <p>ここは逆順表示ページです。文字もすべて逆です。</p>
+      <a href="#" onclick="window.close()">閉じる</a>
+    </body>
+    </html>
+  `);
+}
+</script>
+
+</body>
+</html>
