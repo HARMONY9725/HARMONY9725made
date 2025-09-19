@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>setisikiW</title>
-<meta charset="UTF-8">
 <style>
 body {
     font-family: sans-serif;
@@ -13,23 +12,36 @@ body {
     padding: 20px;
     background: #fff;
     color: #000;
+    transition: background 0.3s, color 0.3s;
 }
+
 #searchBar {
     width: 100%;
     font-size: 18px;
     padding: 10px;
     margin-bottom: 20px;
     transform: scaleX(-1);
+    border: 2px solid #6c63ff;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s, background 0.3s, color 0.3s;
 }
+
+#searchBar:focus {
+    border-color: #574fd6;
+}
+
 #content {
     max-width: 1000px;
     margin: auto;
 }
+
 img, table, pre {
     transform: scaleX(-1);
     max-width: 100%;
     height: auto;
 }
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -40,20 +52,59 @@ table, th, td {
 th, td {
     padding: 4px 8px;
 }
+
 a {
-    color: blue;
+    color: #6c63ff;
     cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s;
 }
+a:hover {
+    color: #574fd6;
+}
+
 h1,h2,h3,h4,h5,h6 {
     border-bottom: 1px solid #ccc;
     padding-bottom: 4px;
     margin-top: 20px;
+    color: #6c63ff;
+    transition: color 0.3s;
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #1e1e1e;
+        color: #e0e0e0;
+    }
+    #searchBar {
+        background: #333;
+        color: #e0e0e0;
+        border-color: #8c84ff;
+    }
+    #searchBar:focus {
+        border-color: #a0a0ff;
+    }
+    table, th, td {
+        border-color: #555;
+    }
+    a {
+        color: #8c84ff;
+    }
+    a:hover {
+        color: #a0a0ff;
+    }
+    h1,h2,h3,h4,h5,h6 {
+        color: #8c84ff;
+        border-color: #555;
+    }
 }
 </style>
 </head>
 <body>
 <input id="searchBar" type="text" placeholder="Wikipedia検索" onkeydown="if(event.key==='Enter'){searchWiki()}">
 <div id="content">ここに記事が表示されます</div>
+
 <script>
 async function searchWiki() {
     const query = document.getElementById('searchBar').value;
@@ -72,6 +123,7 @@ async function searchWiki() {
         document.getElementById('content').innerHTML = '検索中にエラーが発生しました';
     }
 }
+
 async function loadPage(title){
     const pageUrl = `https://ja.wikipedia.org/w/api.php?action=parse&page=${encodeURIComponent(title)}&format=json&origin=*`;
     try {
@@ -79,6 +131,7 @@ async function loadPage(title){
         const pageData = await pageRes.json();
         const html = pageData.parse.text['*'];
         document.getElementById('content').innerHTML = html;
+
         document.querySelectorAll('#content a').forEach(a => {
             a.onclick = e => {
                 e.preventDefault();
@@ -89,6 +142,7 @@ async function loadPage(title){
                 loadPage(newTitle);
             }
         });
+
         document.querySelectorAll('#content img, #content table, #content pre').forEach(el => {
             el.style.transform = 'scaleX(-1)';
         });
