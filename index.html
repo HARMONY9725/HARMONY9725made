@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HARMONY9725 Made</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="shortcut　icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
 <style>
   /* --- Reset & 基本 --- */
   * {
@@ -40,18 +40,22 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     z-index: 1000;
     transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+
+    display: flex;                /* 横並びにする */
+    justify-content: space-between; /* 左右に分ける */
+    align-items: center;          /* 縦方向中央揃え */
   }
 
   header h1 {
     font-size: 1.8rem;
     font-weight: 700;
     color: #ff6363;
-    text-align: right;
-  }
-  header sns {
     text-align: left;
+  }
+
+  header .sns {
     display: flex;
-  　gap: 10px;
+    gap: 10px;
   }
 
   /* --- メインコンテンツ --- */
@@ -153,7 +157,10 @@
 <body>
 
 <header>
-  <h1>HARMONY9725 Made</h1><sns><a href="https://x.com/harmony9725"><img src="images/Xlogo.png" alt="Xlogo" width="20" height="20"></a></sns>
+  <h1>HARMONY9725 Made</h1>
+  <div class="sns">
+    <a href="https://x.com/harmony9725"><img src="images/Xlogo.png" alt="Xlogo" width="20" height="20"></a>
+  </div>
 </header>
 
 <main>
