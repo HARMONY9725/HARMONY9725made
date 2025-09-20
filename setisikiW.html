@@ -22,13 +22,15 @@ body {
     font-size: 18px;
     padding: 10px;
     margin-bottom: 20px;
+    transform: scaleX(-1);
     border: 2px solid #ff6363;
     border-radius: 6px;
     outline: none;
     transition: border-color 0.3s, background 0.3s, color 0.3s;
-    transform: scaleX(-1);
-    direction: rtl;
-    text-align: left;
+}
+
+#searchBar:focus {
+    border-color: #d64f4f;
 }
 
 #content {
@@ -70,6 +72,7 @@ h1,h2,h3,h4,h5,h6 {
     transition: color 0.3s;
 }
 
+/* ドーモクーダ*/
 @media (prefers-color-scheme: dark) {
     body {
         background: #1e1e1e;
@@ -79,6 +82,7 @@ h1,h2,h3,h4,h5,h6 {
         background: #333;
         color: #e0e0e0;
         border-color: #ff8585;
+        transform: scaleX(-1);
     }
     #searchBar:focus {
         border-color: #ffa1a1;
